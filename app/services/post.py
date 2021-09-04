@@ -3,6 +3,10 @@
 from app.models.feed import PostModel
 from app.exts.sqla import db
 
+def get_all(user):
+    """Get all posts for a user"""
+    return user.posts
+
 def insert(**kwargs):
     """Insert post into DB
 

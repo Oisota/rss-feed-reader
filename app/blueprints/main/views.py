@@ -4,12 +4,17 @@ from flask import render_template
 from flask_login import login_required, current_user
 
 from app.services import subscription as subscription_service
+from app.services import post as post_service
 from .forms import SubscriptionForm
 
 @login_required
 def feed():
     """Load whole feed"""
-    return render_template('main/feed.html')
+    posts = post_service.get_all(current_user)
+    data = {
+        'posts': posts
+    }
+    return render_template('main/feed.html', **data)
     
 @login_required
 def subscriptions():
