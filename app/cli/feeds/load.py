@@ -1,5 +1,7 @@
 """Cli task for loading feeds"""
 
+from datetime import datetime
+
 import requests
 import feedparser
 
@@ -15,13 +17,16 @@ def main():
         data = feedparser.parse(resp.text)
 
         for item in data.entries:
+            pub = item.published_parsed
+            pub_date = datetime(pub.tm_year, pub.tm_mon, pub.tm_mday, pub.tm_hour, pub.tm_min, pub.tm_sec)
             info = {
                 'user_id': feed.user_id,
                 'subscription_id': feed.id,
-                'pub_date': item.published_parsed,
+                'pub_date': pub_date,
                 'feed_title': data.feed.title,
+                'title': item.title,
                 'url': item.link,
-                'content': item.content,
+                'content': item.summary,
             }
 
-            feed.insert(**info)
+            post.insert(**info)

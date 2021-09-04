@@ -5,9 +5,11 @@ from flask_login import current_user
 from app.exts.sqla import db
 from app.models.feed import SubscriptionModel
 
-def get_all(user):
+def get_all(user=None):
     """Get all feeds for a user"""
-    return user.subscriptions
+    if user:
+        return user.subscriptions
+    return SubscriptionModel.query.all()
 
 def add(user, url):
     """Add feed for a user"""
