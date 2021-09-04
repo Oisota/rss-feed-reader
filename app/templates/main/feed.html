@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% set active_page = "feed" %}
+
+{% block title %}Feed{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-xl-8 offset-xl-2">
+		{% for post in posts %}
+		<a href="{{ post.url }}">{{ post.title }}</a>
+		{{ post.pub_date }}
+		{{ post.feed_title }}
+		{{ post.saved }}
+		{{ post.content | safe }}
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

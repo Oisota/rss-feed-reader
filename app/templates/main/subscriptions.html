@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set active_page = "subscriptions" %}
+
+{% block title %}Subscriptions{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-xl-8 offset-xl-2">
+
+		<div class="bg-dark text-light p-3 rounded-top">
+			<form action="" method="post"></form>
+			<form action="{{ url_for('main.subscriptions') }}" method="post" class="form-inline d-flex flex-row">
+				{{ form.csrf_token }}
+				<div class="form-group d-flex flex-row flex-grow-1">
+					{{ form.url.label(class_="mr-2") }}
+					{{ form.url(class_="form-control flex-grow-1", placeholder="Enter a valid feed URL") }}
+				</div>
+				<input type="submit" value="Add" class="btn btn-success ml-2">
+			</form>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>URL</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for sub in subscriptions %}
+					<tr>
+						<td>{{ sub.url }}</td>
+						<td>
+							<button class="btn btn-warning btn-sm">Edit</button>
+							<button class="btn btn-danger btn-sm">Delete</button>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+{% endblock %}

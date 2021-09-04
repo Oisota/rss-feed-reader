@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="row pt-5">
+	<div class="col-xl-4 offset-xl-4">
+		<div class="card">
+			<div class="card-header">
+				<h3>Login</h3>
+			</div>
+			<div class="card-body">
+				<form method="POST" action="{{ url_for('auth.login') }}">
+					{{ form.csrf_token }}
+					<div class="form-group pb-2">
+						{{ form.email.label }}
+						{{ form.email(class_='form-control') }}
+					</div>
+					<div class="form-group pb-2">
+						<div class="d-flex justify-content-between">
+							{{ form.password.label }}
+							<small><a class="disabled" href="#">Forgot Password?</a></small>
+						</div>
+						{{ form.password(class_='form-control') }}
+					</div>
+					{% if login_message %}
+					<div class="d-flex flex-row justify-content-center">
+						<small class="text-danger">{{ login_message }}</small>
+					</div>
+					{% endif %}
+					<input class="btn btn-primary w-100 my-3" type="submit" name="login" id="login" value="Login" />
+				</form>
+			</div>
+			<div class="card-footer text-center">
+					<a href="#" data-toggle="modal" data-target="#register-modal">Create Account</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block modals %}
+<div id="register-modal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Register</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form id="register-form" method="POST" action="{{ url_for('auth.register') }}">
+					{{ register_form.csrf_token }}
+					<div class="form-group pb-2">
+						{{ register_form.email.label }}
+						{{ register_form.email(class_='form-control') }}
+					</div>
+					<div class="form-group pb-2">
+						{{ register_form.password.label }}
+						{{ register_form.password(class_='form-control') }}
+					</div>
+				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="register-submit" type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	$(document).ready(() => {
+		$('#register-submit').click(function() {
+			$('#register-form').submit();
+		});
+	});
+</script>
+{% endblock %}
