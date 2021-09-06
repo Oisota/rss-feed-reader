@@ -25,3 +25,25 @@
 	</ul>
 </nav>
 {% endmacro %}
+
+{% macro feed_item(post) %}
+<div class="card mb-2">
+	<div class="card-header">
+		<div class="d-flex flex-row justify-content-between align-items-center">
+			<h5 class="card-title"><a href="{{ post.url }}" class="text-dark">{{ post.title }}</a></h5>
+			<div class="btn-group">
+				<button class="btn btn-sm btn-outline-primary {% if post.saved %}disabled{% endif %}">save</button>
+				<button class="btn btn-sm btn-outline-danger">delete</button>
+			</div>
+		</div>
+		<div class="d-flex flex-row">
+			<a href="{{ post.subscription.url }}">{{ post.feed_title }}</a>
+			<span class="mx-1">|</span>
+			{{ post.pub_date }}
+		</div>
+	</div>
+	<div class="card-body">
+		{{ post.content | safe }}
+	</div>
+</div>
+{% endmacro %}

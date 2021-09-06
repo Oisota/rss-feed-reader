@@ -10,7 +10,16 @@ log = logging.getLogger(__name__)
 
 def get_all(user, page=1, per_page=20):
     """Get all posts for a user"""
-    return user.posts.order_by(PostModel.pub_date.desc()).paginate(page, per_page, error_out=False)
+    return user.posts \
+        .order_by(PostModel.pub_date.desc()) \
+        .paginate(page, per_page, error_out=False)
+
+def get_saved(user, page=1, per_page=20):
+    """Get all posts for a user"""
+    return user.posts \
+        .filter(PostModel.saved == True) \
+        .order_by(PostModel.pub_date.desc()) \
+        .paginate(page, per_page, error_out=False)
 
 def insert(**kwargs):
     """Insert post into DB

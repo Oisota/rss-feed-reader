@@ -1,7 +1,7 @@
 {% set navbar = [
     (url_for('main.feed'), 'feed', 'Feed'),
     (url_for('main.subscriptions'), 'subscriptions', 'Subscriptions'),
-    (url_for('main.feed'), 'favorites', 'Favorites')
+    (url_for('main.saved'), 'saved', 'Saved')
 ] -%}
 {% set active_page = active_page|default('feed') -%}
 

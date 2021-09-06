@@ -17,6 +17,16 @@ def feed():
         'posts': posts
     }
     return render_template('main/feed.html', **data)
+
+@login_required
+def saved():
+    page = int(request.args.get('page', '1'))
+    per_page = 20
+    posts = post_service.get_saved(current_user, page=page, per_page=per_page)
+    data = {
+        'posts': posts
+    }
+    return render_template('main/saved.html', **data)
     
 @login_required
 def subscriptions():
