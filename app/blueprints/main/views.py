@@ -1,6 +1,6 @@
 """Feed Routes"""
 
-from flask import render_template
+from flask import render_template, request
 from flask_login import login_required, current_user
 
 from app.services import subscription as subscription_service
@@ -10,7 +10,9 @@ from .forms import SubscriptionForm
 @login_required
 def feed():
     """Load whole feed"""
-    posts = post_service.get_all(current_user)
+    page = int(request.args.get('page', '1'))
+    per_page = 20
+    posts = post_service.get_all(current_user, page=page, per_page=per_page)
     data = {
         'posts': posts
     }

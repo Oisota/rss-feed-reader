@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros.html" as macros %}
 {% set active_page = "feed" %}
 
 {% block title %}Feed{% endblock %}
@@ -6,7 +7,8 @@
 {% block body %}
 <div class="row">
 	<div class="col-xl-6 offset-xl-3">
-		{% for post in posts %}
+		{{ macros.pagination(posts, 'main.feed') }}
+		{% for post in posts.items %}
 		<div class="card mb-2">
 			<div class="card-body">
 				<div class="d-flex flex-row justify-content-between align-items-center">
@@ -25,6 +27,7 @@
 			</div>
 		</div>
 		{% endfor %}
+		{{ macros.pagination(posts, 'main.feed') }}
 	</div>
 </div>
 {% endblock %}

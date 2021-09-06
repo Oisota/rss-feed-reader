@@ -1,11 +1,16 @@
 """Post Service"""
+import logging
+
+from sqlalchemy.exc import IntegrityError
 
 from app.models.feed import PostModel
 from app.exts.sqla import db
 
-def get_all(user):
+log = logging.getLogger(__name__)
+
+def get_all(user, page=1, per_page=20):
     """Get all posts for a user"""
-    return user.posts
+    return user.posts.order_by(PostModel.pub_date.desc()).paginate(page, per_page, error_out=False)
 
 def insert(**kwargs):
     """Insert post into DB
@@ -21,4 +26,8 @@ def insert(**kwargs):
     """
     post = PostModel(**kwargs)
     db.session.add(post)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        db.session.rollback()
+        log.debug('Duplicate post, skipping')

@@ -23,7 +23,7 @@ class PostModel(db.Model):
     )
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('UserModel', backref=db.backref('posts', lazy=True))
+    user = db.relationship('UserModel', backref=db.backref('posts', lazy='dynamic'))
     subscription_id = db.Column(db.Integer, db.ForeignKey('subscription.id'), nullable=False)
     subscription = db.relationship(SubscriptionModel, backref=db.backref('posts', lazy=True))
     pub_date = db.Column(db.DateTime, nullable=False)
