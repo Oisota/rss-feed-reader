@@ -6,6 +6,7 @@ from .settings import configure
 from .exts import init_extenions
 from .cli import register_commands
 from .blueprints import register_blueprints
+from .template_filters import register_filters
 
 def create_app():
     """App factory function"""
@@ -14,4 +15,5 @@ def create_app():
     init_extenions(app)
     register_commands(app)
     register_blueprints(app)
+    register_filters(app)
     return app
