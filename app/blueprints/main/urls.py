@@ -4,7 +4,7 @@ from flask import Blueprint
 
 from . import views
 
-bp = Blueprint('main', __name__)
+bp = Blueprint('main', __name__, template_folder='templates')
 
 bp.add_url_rule('/', view_func=views.feed, methods=['GET'])
 bp.add_url_rule('/saved', view_func=views.saved, methods=['GET'])
