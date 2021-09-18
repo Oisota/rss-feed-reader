@@ -40,3 +40,13 @@ def insert(**kwargs):
     except IntegrityError as e:
         db.session.rollback()
         log.debug('Duplicate post, skipping')
+
+def toggle_save(post_id):
+    """Mark post as saved"""
+    post = PostModel.query.get(post_id)
+    if post.saved:
+        post.saved = False
+    else:
+        post.saved = True
+    db.session.commit()
+    return post

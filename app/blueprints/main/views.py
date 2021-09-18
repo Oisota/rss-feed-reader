@@ -27,6 +27,15 @@ def saved():
         'posts': posts
     }
     return render_template('main/saved.html', **data)
+
+@login_required
+def toggle_save_post(post_id):
+    """Updated saved status for post"""
+    post = post_service.toggle_save(post_id)
+    data = {
+        'post': post,
+    }
+    return render_template('main/post.html', **data)
     
 @login_required
 def subscriptions():
