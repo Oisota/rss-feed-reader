@@ -1,9 +1,14 @@
 """Blueprints"""
 
-from .auth import bp as auth_bp
-from .main import bp as main_bp
+import importlib
+
+blueprints = [
+    'app.blueprints.auth',
+    'app.blueprints.main',
+]
 
 def register_blueprints(app):
     """Register blueprints on app"""
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(main_bp)
+    for bp in blueprints:
+        mod = importlib.import_module(bp)
+        app.register_blueprint(mod.bp)
