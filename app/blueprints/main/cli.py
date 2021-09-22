@@ -8,7 +8,11 @@ import feedparser
 from app.services import subscription
 from app.services import post
 
-def main():
+def register_commands(bp):
+    """Register CLI commands on blueprint"""
+    bp.cli.command('load')(load)
+
+def load():
     """Load feeds, save to DB"""
     feeds = subscription.get_all()
 
