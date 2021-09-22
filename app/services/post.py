@@ -2,6 +2,7 @@
 import logging
 
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import NotFound
 
 from app.models.feed import PostModel
 from app.exts.sqla import db
@@ -50,3 +51,11 @@ def toggle_save(post_id):
         post.saved = True
     db.session.commit()
     return post
+
+def delete(post_id):
+    """Delete post"""
+    post = PostModel.query.get(post_id)
+    if not post:
+        raise NotFound('Post {} Not Found'.format(post_id))
+    db.session.delete(post)
+    db.session.commit()

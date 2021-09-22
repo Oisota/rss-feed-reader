@@ -81,7 +81,14 @@
 					save
 				</button>
 				{% endif %}
-				<button class="btn btn-sm btn-outline-danger">delete</button>
+				<button
+					class="btn btn-sm btn-outline-danger"
+					hx-delete="{{ url_for('main.delete_post', post_id=post.id) }}"
+					hx-trigger="click"
+					hx-target="#post-{{ post.id }}"
+					hx-swap="outerHTML">
+					delete
+				</button>
 			</div>
 		</div>
 	</div>

@@ -36,6 +36,12 @@ def toggle_save_post(post_id):
         'post': post,
     }
     return render_template('main/post.html', **data)
+
+@login_required
+def delete_post(post_id):
+    """Delete post"""
+    post_service.delete(post_id)
+    return '', 204
     
 @login_required
 def subscriptions():
