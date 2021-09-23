@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "main/macros.html" as macros %}
+{% import "feed/macros.html" as macros %}
 {% set active_page = "feed" %}
 
 {% block title %}Feed{% endblock %}
@@ -7,11 +7,11 @@
 {% block body %}
 <div class="row">
 	<div class="col-xl-6 offset-xl-3">
-		{{ macros.pagination(posts, 'main.feed') }}
+		{{ macros.pagination(posts, 'feed.feed') }}
 		{% for post in posts.items %}
 		{{ macros.feed_item(post) }}
 		{% endfor %}
-		{{ macros.pagination(posts, 'main.feed') }}
+		{{ macros.pagination(posts, 'feed.feed') }}
 	</div>
 </div>
 {% endblock %}

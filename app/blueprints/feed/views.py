@@ -16,7 +16,7 @@ def feed():
     data = {
         'posts': posts
     }
-    return render_template('main/feed.html', **data)
+    return render_template('feed/feed.html', **data)
 
 @login_required
 def saved():
@@ -26,7 +26,7 @@ def saved():
     data = {
         'posts': posts
     }
-    return render_template('main/saved.html', **data)
+    return render_template('feed/saved.html', **data)
 
 @login_required
 def toggle_save_post(post_id):
@@ -35,7 +35,7 @@ def toggle_save_post(post_id):
     data = {
         'post': post,
     }
-    return render_template('main/post.html', **data)
+    return render_template('feed/post.html', **data)
 
 @login_required
 def delete_post(post_id):
@@ -58,4 +58,4 @@ def subscriptions():
         'form': form,
         'subscriptions': subscriptions,
     }
-    return render_template('main/subscriptions.html', **data)
+    return render_template('feed/subscriptions.html', **data)

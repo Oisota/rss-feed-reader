@@ -1,7 +1,7 @@
 {% set navbar = [
-    (url_for('main.feed'), 'feed', 'Feed'),
-    (url_for('main.subscriptions'), 'subscriptions', 'Subscriptions'),
-    (url_for('main.saved'), 'saved', 'Saved')
+    (url_for('feed.feed'), 'feed', 'Feed'),
+    (url_for('feed.subscriptions'), 'subscriptions', 'Subscriptions'),
+    (url_for('feed.saved'), 'saved', 'Saved')
 ] -%}
 {% set active_page = active_page|default('feed') -%}
 
@@ -19,7 +19,7 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="{{ url_for('main.feed') }}">Feed Reader</a>
+		<a class="navbar-brand" href="{{ url_for('feed.feed') }}">Feed Reader</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>

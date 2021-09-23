@@ -19,7 +19,7 @@ def login():
 
         if user: # user validated, login
             login_user(user)
-            return redirect(url_for('main.feed'))
+            return redirect(url_for('feed.feed'))
 
         login_message = 'Incorrect email or password'
 
@@ -44,6 +44,6 @@ def register():
         password = form.password.data
         user = user_service.register(email, password)
         login_user(user)
-        return redirect(url_for('main.feed'))
+        return redirect(url_for('feed.feed'))
     
     return redirect(url_for('auth.login'))

@@ -4,7 +4,7 @@ import importlib
 
 blueprints = [
     'app.blueprints.auth',
-    'app.blueprints.main',
+    'app.blueprints.feed',
 ]
 
 def register_blueprints(app):

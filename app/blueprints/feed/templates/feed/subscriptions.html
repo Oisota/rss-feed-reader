@@ -9,7 +9,7 @@
 
 		<div class="bg-dark text-light p-3 rounded-top">
 			<form action="" method="post"></form>
-			<form action="{{ url_for('main.subscriptions') }}" method="post" class="form-inline d-flex flex-row">
+			<form action="{{ url_for('feed.subscriptions') }}" method="post" class="form-inline d-flex flex-row">
 				{{ form.csrf_token }}
 				<div class="form-group d-flex flex-row flex-grow-1">
 					{{ form.url.label(class_="mr-2") }}
