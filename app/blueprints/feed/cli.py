@@ -22,7 +22,10 @@ def load():
 
         for item in data.entries:
             try:
-                pub = item.published_parsed
+                if hasattr(item, 'published_parsed'):
+                    pub = item.published_parsed
+                else:
+                    pub = item.updated_parsed
                 pub_date = datetime(pub.tm_year, pub.tm_mon, pub.tm_mday, pub.tm_hour, pub.tm_min, pub.tm_sec)
                 info = {
                     'user_id': feed.user_id,
