@@ -1,7 +1,6 @@
 {% set navbar = [
     (url_for('feed.feed'), 'feed', 'Feed'),
     (url_for('feed.subscriptions'), 'subscriptions', 'Subscriptions'),
-    (url_for('feed.saved'), 'saved', 'Saved')
 ] -%}
 {% set active_page = active_page|default('feed') -%}
 
@@ -13,6 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Feed Reader | {% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 	{% block styles %}
 	{% endblock %}
 </head>
