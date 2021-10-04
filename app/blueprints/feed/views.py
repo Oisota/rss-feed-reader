@@ -12,21 +12,15 @@ def feed():
     """Load whole feed"""
     page = int(request.args.get('page', '1'))
     per_page = 20
-    posts = post_service.get_all(current_user, page=page, per_page=per_page)
+    saved = request.args.get('saved', '').lower() == 'true'
+    if saved:
+        posts = post_service.get_saved(current_user, page=page, per_page=per_page)
+    else:
+        posts = post_service.get_all(current_user, page=page, per_page=per_page)
     data = {
         'posts': posts
     }
     return render_template('feed/feed.html', **data)
-
-@login_required
-def saved():
-    page = int(request.args.get('page', '1'))
-    per_page = 20
-    posts = post_service.get_saved(current_user, page=page, per_page=per_page)
-    data = {
-        'posts': posts
-    }
-    return render_template('feed/saved.html', **data)
 
 @login_required
 def toggle_save_post(post_id):
@@ -41,7 +35,7 @@ def toggle_save_post(post_id):
 def delete_post(post_id):
     """Delete post"""
     post_service.delete(post_id)
-    return '', 204
+    return '', 200
     
 @login_required
 def subscriptions():

@@ -78,30 +78,33 @@
 			<div class="btn-group">
 				{% if post.saved %}
 				<button
-					class="btn btn-sm btn-outline-primary disabled"
+					class="btn btn-sm btn-primary disabled"
+					title="Saved"
 					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
 					hx-trigger="click"
 					hx-target="#post-{{ post.id }}"
 					hx-swap="outerHTML">
-					saved
+					<i class="las la-lg la-bookmark"></i>
 				</button>
 				{% else %}
 				<button
 					class="btn btn-sm btn-outline-primary"
+					title="Save"
 					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
 					hx-trigger="click"
 					hx-target="#post-{{ post.id }}"
 					hx-swap="outerHTML">
-					save
+					<i class="lar la-lg la-bookmark"></i>
 				</button>
 				{% endif %}
 				<button
 					class="btn btn-sm btn-outline-danger"
+					title="Delete"
 					hx-delete="{{ url_for('feed.delete_post', post_id=post.id) }}"
 					hx-trigger="click"
 					hx-target="#post-{{ post.id }}"
 					hx-swap="outerHTML">
-					delete
+					<i class="la la-lg la-trash-alt"></i>
 				</button>
 			</div>
 		</div>

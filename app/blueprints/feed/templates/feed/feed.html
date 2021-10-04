@@ -7,11 +7,33 @@
 {% block body %}
 <div class="row">
 	<div class="col-xl-6 offset-xl-3">
-		{{ macros.pagination(posts, 'feed.feed') }}
-		{% for post in posts.items %}
-		{{ macros.feed_item(post) }}
-		{% endfor %}
-		{{ macros.pagination(posts, 'feed.feed') }}
+		<div class="d-flex flex-row justify-content-between align-items-center">
+
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-secondary active btn-sm">
+					<input type="radio" name="options" id="option1" autocomplete="off" checked> all
+				</label>
+				<label class="btn btn-secondary btn-sm">
+					<input type="radio" name="options" id="option2" autocomplete="off"> saved
+				</label>
+			</div>
+
+			<input type="text" class="form-control form-control-sm mx-2" placeholder="Search">
+
+			{{ macros.pagination(posts, 'feed.feed') }}
+
+		</div>
+
+		<div id="feed-container">
+			{% for post in posts.items %}
+			{{ macros.feed_item(post) }}
+			{% endfor %}
+		</div>
+
+		<div class="d-flex flex-row justify-content-end">
+			{{ macros.pagination(posts, 'feed.feed') }}
+		</div>
+
 	</div>
 </div>
 {% endblock %}

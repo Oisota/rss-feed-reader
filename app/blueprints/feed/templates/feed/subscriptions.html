@@ -32,8 +32,12 @@
 					<tr>
 						<td>{{ sub.url }}</td>
 						<td>
-							<button class="btn btn-warning btn-sm">Edit</button>
-							<button class="btn btn-danger btn-sm">Delete</button>
+							<button class="btn btn-warning btn-sm" title="Edit">
+								<i class="las la-lg la-pen"></i>
+							</button>
+							<button class="btn btn-danger btn-sm" title="Delete">
+								<i class="las la-lg la-trash-alt"></i>
+							</button>
 						</td>
 					</tr>
 					{% endfor %}
