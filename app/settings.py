@@ -1,9 +1,6 @@
 """Load config"""
 
-import os
 import json
-
-from flask import Flask
 
 def configure(app):
     """Configure the app"""
