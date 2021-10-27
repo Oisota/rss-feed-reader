@@ -10,17 +10,11 @@
 		<div class="d-flex flex-row justify-content-between align-items-center">
 
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
-				<label class="btn btn-secondary active btn-sm">
-					<input type="radio" name="options" id="option1" autocomplete="off" checked> all
-				</label>
-				<label class="btn btn-secondary btn-sm">
-					<input type="radio" name="options" id="option2" autocomplete="off"> saved
-				</label>
+				<a href="{{ url_for('feed.feed') }}" class="btn btn-secondary active btn-sm">all</a>
+				<a href="{{ url_for('feed.feed', saved=True) }}" class="btn btn-secondary btn-sm">saved</a>
 			</div>
 
-			<input type="text" class="form-control form-control-sm mx-2" placeholder="Search">
-
-			{{ macros.pagination(posts, 'feed.feed') }}
+			{{ macros.pagination(posts, 'feed.feed', args={'saved': request.args.get('saved')}) }}
 
 		</div>
 
@@ -31,7 +25,7 @@
 		</div>
 
 		<div class="d-flex flex-row justify-content-end">
-			{{ macros.pagination(posts, 'feed.feed') }}
+			{{ macros.pagination(posts, 'feed.feed', args={'saved': request.args.get('saved')}) }}
 		</div>
 
 	</div>

@@ -1,15 +1,15 @@
-{% macro pagination(items, endpoint) %}
+{% macro pagination(items, endpoint, args) %}
 <nav aria-label="Page navigation">
 	<ul class="pagination pagination-sm my-2">
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=1) }}" title="First">
+			<a class="page-link" href="{{ url_for(endpoint, page=1, **args) }}" title="First">
 				<i class="las la-angle-double-left"></i>
 			</a>
 		</li>
 
 		{% if items.has_prev %}
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=items.prev_num) }}" title="Previous">
+			<a class="page-link" href="{{ url_for(endpoint, page=items.prev_num, **args) }}" title="Previous">
 				<i class="las la-angle-left"></i>
 			</a>
 		</li>
@@ -24,7 +24,7 @@
 		<!-- previous page number -->
 		{% if items.has_prev %}
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=items.prev_num) }}">{{items.prev_num}}</a>
+			<a class="page-link" href="{{ url_for(endpoint, page=items.prev_num, **args) }}">{{items.prev_num}}</a>
 		</li>
 		{% endif %}
 
@@ -36,13 +36,13 @@
 		<!-- next page number -->
 		{% if items.has_next %}
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=items.next_num) }}">{{items.next_num}}</a>
+			<a class="page-link" href="{{ url_for(endpoint, page=items.next_num, **args) }}">{{items.next_num}}</a>
 		</li>
 		{% endif %}
 
 		{% if items.has_next %}
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=items.next_num) }}" title="Next">
+			<a class="page-link" href="{{ url_for(endpoint, page=items.next_num, **args) }}" title="Next">
 				<i class="las la-angle-right"></i>
 			</a>
 		</li>
@@ -55,7 +55,7 @@
 		{% endif %}
 
 		<li class="page-item">
-			<a class="page-link" href="{{ url_for(endpoint, page=items.pages) }}" title="Last">
+			<a class="page-link" href="{{ url_for(endpoint, page=items.pages, **args) }}" title="Last">
 				<i class="las la-angle-double-right"></i>
 			</a>
 		</li>
