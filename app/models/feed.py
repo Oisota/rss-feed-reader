@@ -13,7 +13,7 @@ class SubscriptionModel(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     url = db.Column(db.String(255), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship('UserModel', backref=db.backref('subscriptions', lazy=True))
+    user = db.relationship('UserModel', backref=db.backref('subscriptions', lazy=True, order_by='SubscriptionModel.url'))
 
 class PostModel(db.Model):
     """Individual Feed Post"""
