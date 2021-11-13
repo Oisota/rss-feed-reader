@@ -1,2 +1,2 @@
-{% import "feed/macros.html" as macros %}
-{{ macros.feed_item(post) }}
+{% from "feed/macros.html" import feed_list_item %}
+{{ feed_list_item(post, None, False) }}
