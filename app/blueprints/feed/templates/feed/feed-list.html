@@ -1,0 +1,49 @@
+{% import "feed/macros.html" as macros %}
+{% for post in posts.items %}
+<div
+	id="post-{{ post.id }}"
+	class="list-group-item list-group-item-action py-1 px-2 pb-2"
+	{% if loop.last %}hx-get="{{ url_for('feed.feed_list', page=posts.next_num) }}" hx-trigger="intersect" hx-swap="afterend"{% endif %}>
+	<div hx-get="{{ url_for('feed.post_content', post_id=post.id) }}" hx-trigger="click consume" hx-target="#post-content" hx-swap="unset">
+		<small class="d-flex flex-row justify-content-between text-secondary pb-1">
+			<a href="{{ post.subscription.url }}">{{ post.feed_title }}</a>
+			{{ post.pub_date | date('%a %b %d, %Y at %I:%m %p') }}
+		</small>
+		<h6>{{ post.title }}</h6>
+		<div class="d-flex flex-row justify-content-end">
+			<div class="btn-group">
+				{% if post.saved %}
+				<button
+					class="btn btn-sm btn-primary disabled"
+					title="Saved"
+					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
+					hx-trigger="click consume"
+					hx-target="#post-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="las la-lg la-bookmark"></i>
+				</button>
+				{% else %}
+				<button
+					class="btn btn-sm btn-outline-primary"
+					title="Save"
+					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
+					hx-trigger="click consume"
+					hx-target="#post-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="lar la-lg la-bookmark"></i>
+				</button>
+				{% endif %}
+				<button
+					class="btn btn-sm btn-outline-danger"
+					title="Delete"
+					hx-delete="{{ url_for('feed.post_content', post_id=post.id) }}"
+					hx-trigger="click consume"
+					hx-target="#post-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="la la-lg la-trash-alt"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}

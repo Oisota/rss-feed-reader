@@ -9,6 +9,13 @@ from app.exts.sqla import db
 
 log = logging.getLogger(__name__)
 
+def get_one(post_id):
+    """get single post"""
+    post = PostModel.query.get(post_id)
+    if not post:
+        raise NotFound('Post {} Not Found'.format(post_id))
+    return post
+
 def get_all(user, page=1, per_page=20):
     """Get all posts for a user"""
     return user.posts \

@@ -1,0 +1,49 @@
+<div id="post-content-{{ post.id }}" class="card">
+	<div class="card-header">
+		<div class="d-flex flex-row justify-content-between pb-2">
+			<small class="d-flex flex-row align-items-center text-secondary">
+				<a href="{{ post.subscription.url }}">{{ post.feed_title }}</a>
+				<span class="text-secondary px-1">|</span>
+				{{ post.pub_date | date('%a %b %d, %Y at %I:%m %p') }}
+			</small>
+			<div class="btn-group">
+				{% if post.saved %}
+				<button
+					class="btn btn-sm btn-primary disabled"
+					title="Saved"
+					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
+					hx-trigger="click"
+					hx-target="#post-content-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="las la-lg la-bookmark"></i>
+				</button>
+				{% else %}
+				<button
+					class="btn btn-sm btn-outline-primary"
+					title="Save"
+					hx-post="{{ url_for('feed.toggle_save_post', post_id=post.id) }}"
+					hx-trigger="click"
+					hx-target="#post-content-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="lar la-lg la-bookmark"></i>
+				</button>
+				{% endif %}
+				<button
+					class="btn btn-sm btn-outline-danger"
+					title="Delete"
+					hx-delete="{{ url_for('feed.post_content', post_id=post.id) }}"
+					hx-trigger="click"
+					hx-target="#post-content-{{ post.id }}"
+					hx-swap="outerHTML">
+					<i class="la la-lg la-trash-alt"></i>
+				</button>
+			</div>
+		</div>
+		<h4 class="mb-0">
+			<a href="{{ post.url }}" class="text-dark">{{post.title}}</a>
+		</h4>
+	</div>
+	<div class="card-body">
+		{{ post.content | safe }}
+	</div>
+</div>
