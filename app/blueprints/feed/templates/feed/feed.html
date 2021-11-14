@@ -6,10 +6,10 @@
 {% block styles %}
 <style>
 	#feed-container {
-		height: calc(100vh - 9rem);
+		height: calc(100vh - 7rem);
 		overflow-y: scroll;
 	}
-	#post-content .card-body {
+	#post-content .post-body {
 		height: calc(100vh - 12rem);
 		overflow-y: scroll;
 	}
@@ -18,18 +18,23 @@
 
 {% block body %}
 <div class="row">
-	<div class="col-xl-3 offset-xl-2">
+	<div class="col-xl-3 offset-xl-2 border-left border-right border-bottom px-0">
 
-		<div class="btn-group btn-group-toggle w-100 mb-1" data-toggle="buttons">
-			<a href="{{ url_for('feed.feed') }}" class="btn btn-secondary active btn-sm">All</a>
-			<a href="{{ url_for('feed.feed', saved=True) }}" class="btn btn-secondary btn-sm">Saved</a>
+		<div class="bg-light border-bottom p-2">
+			<div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+				<a href="{{ url_for('feed.feed') }}" class="btn btn-secondary active btn-sm">All</a>
+				<a href="{{ url_for('feed.feed', saved=True) }}" class="btn btn-secondary btn-sm">Saved</a>
+			</div>
 		</div>
 
-		<div id="feed-container" class="list-group" hx-get="{{  url_for('feed.feed_list') }}" hx-trigger="load">
+		<div id="feed-container" class="" hx-get="{{  url_for('feed.feed_list') }}" hx-trigger="load">
 		</div>
 
 	</div>
-	<div id="post-content" class="col-xl-5">
+	<div id="post-content" class="col-xl-5 p-0 border-right border-bottom">
+		<div class="w-100 h-100 d-flex flex-row justify-content-center align-items-center">
+			<span class="text-secondary">No posts selected</span>
+		</div>
 	</div>
 </div>
 {% endblock %}
